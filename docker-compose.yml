@@ -2,10 +2,24 @@ version: '3.2'
 services:
     jenkins:
         build:
-            context: https://github.com/Zlogene/docker.git
-            dockerfile: Dockerfile-openj9-jdk11
+            context: .
+            dockerfile: ./jenkins/Dockerfile-alpine
             args:
                JENKINS_VERSION: 2.235
         ports:
            - 8080:8080
            - 50000:50000
+        volumes:
+           - /tmp:/var/jenkins_home/secrets/
+    gitea:
+        build:
+            context: https://github.com/go-gitea/gitea.git
+        ports:
+            - 22:22
+            - 3000:3000
+    openproject:
+        build:
+            context: https://github.com/opf/openproject.git#dev
+        ports:
+            - 5432:5432
+            - 8090:80
