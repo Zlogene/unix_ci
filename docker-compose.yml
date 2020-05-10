@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+    jenkins:
+        build:
+            context: https://github.com/Zlogene/docker.git
+            dockerfile: Dockerfile-openj9-jdk11
+            args:
+               JENKINS_VERSION: 2.235
+        ports:
+           - 8080:8080
+           - 50000:50000
