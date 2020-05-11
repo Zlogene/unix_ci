@@ -1,0 +1,97 @@
+//-- copyright
+// OpenProject is an open source project management software.
+// Copyright (C) 2012-2020 the OpenProject GmbH
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License version 3.
+//
+// OpenProject is a fork of ChiliProject, which is a fork of Redmine. The copyright follows:
+// Copyright (C) 2006-2013 Jean-Philippe Lang
+// Copyright (C) 2010-2013 the ChiliProject Team
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+//
+// See docs/COPYRIGHT.rdoc for more details.
+//++
+
+import {UserResource} from 'core-app/modules/hal/resources/user-resource';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input} from "@angular/core";
+import {PathHelperService} from "core-app/modules/common/path-helper/path-helper.service";
+import {ColorsService} from "core-app/modules/common/colors/colors.service";
+
+export const userAvatarSelector = 'user-avatar';
+
+@Component({
+  selector: userAvatarSelector,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './user-avatar.component.html'
+})
+export class UserAvatarComponent implements AfterViewInit {
+  /** If coming from angular, pass a user resource if availabe */
+  @Input() public user?:UserResource;
+
+  public userInitials:string;
+  public userName:string;
+  public colorCode:string;
+  public userId:string;
+  public classes:string;
+  public userAvatarUrl:string;
+
+  public useFallback:boolean;
+
+  constructor(protected elementRef:ElementRef,
+              protected ref:ChangeDetectorRef,
+              protected pathHelper:PathHelperService,
+              protected colors:ColorsService) {
+  }
+
+  public ngAfterViewInit() {
+    this.initialize();
+  }
+
+  public replaceWithDefault() {
+    this.useFallback = true;
+    this.ref.detectChanges();
+  }
+
+  private initialize() {
+    const element = this.elementRef.nativeElement;
+
+    if (this.user) {
+      this.userId = this.user.id!;
+      this.userName = this.user.name;
+    } else {
+      this.userId = element.dataset.userId!;
+      this.userName = element.dataset.userName!;
+    }
+
+    this.classes = element.dataset.classList!;
+    this.useFallback = element.dataset.useFallback!;
+    this.userAvatarUrl = this.pathHelper.api.v3.users.id(this.userId).avatar.toString();
+    this.userInitials = this.getInitials(this.userName);
+    this.colorCode = this.colors.toHsl(this.userName);
+    this.ref.detectChanges();
+  }
+
+  private getInitials(name:string) {
+    let characters = [...name];
+    let lastSpace = name.lastIndexOf(' ');
+    let first = characters[0]?.toUpperCase();
+    let last = name[lastSpace + 1]?.toUpperCase();
+
+    return [first, last].join("");
+  }
+}
+
