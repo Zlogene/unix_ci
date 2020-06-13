@@ -2,8 +2,8 @@ version: '3.2'
 services:
     jenkins:
         build:
-            context: .
-            dockerfile: ./jenkins/Dockerfile-alpine
+            context: jenkins
+            dockerfile: Dockerfile-alpine
             args:
                JENKINS_VERSION: 2.235
         ports:
@@ -13,13 +13,13 @@ services:
            - /tmp:/var/jenkins_home/secrets/
     gitea:
         build:
-            context: https://github.com/go-gitea/gitea.git
+            context: gitea
         ports:
             - 22:22
             - 3000:3000
     openproject:
         build:
-            context: https://github.com/opf/openproject.git#dev
+            context: openproject
         ports:
             - 5432:5432
             - 8090:80
