@@ -1,6 +1,7 @@
 version: '3.2'
 services:
     jenkins:
+        container_name: jenkins
         build:
             context: jenkins
             dockerfile: Dockerfile-alpine
@@ -12,12 +13,14 @@ services:
         volumes:
            - /tmp:/var/jenkins_home/secrets/
     gitea:
+        container_name: gitea
         build:
             context: gitea
         ports:
             - 22:22
             - 3000:3000
     openproject:
+        container_name: openproject
         build:
             context: openproject
         ports:
