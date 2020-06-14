@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+lScalar+lScalarPlain}{\PYGZbs{}begin\PYGZob{}figure\PYGZcb{}}
+\PYG{l+lScalar+lScalarPlain}{version}\PYG{p+pIndicator}{:} \PYG{l+s}{\PYGZsq{}3.2\PYGZsq{}}
+\PYG{n+nt}{services}\PYG{p}{:}
+    \PYG{n+nt}{jenkins}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{jenkins}
+        \PYG{n+nt}{build}\PYG{p}{:}
+            \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{jenkins}
+            \PYG{n+nt}{dockerfile}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{Dockerfile\PYGZhy{}alpine}
+            \PYG{n+nt}{args}\PYG{p}{:}
+               \PYG{n+nt}{JENKINS\PYGZus{}VERSION}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{2.235}
+        \PYG{n+nt}{ports}\PYG{p}{:}
+           \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{8080:8080}
+           \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{50000:50000}
+        \PYG{n+nt}{volumes}\PYG{p}{:}
+           \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{/tmp:/var/jenkins\PYGZus{}home/secrets/}
+    \PYG{n+nt}{gitea}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{gitea}
+        \PYG{n+nt}{build}\PYG{p}{:}
+            \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{gitea}
+        \PYG{n+nt}{ports}\PYG{p}{:}
+            \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{222:22}
+            \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{3000:3000}
+    \PYG{n+nt}{openproject}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{openproject}
+        \PYG{n+nt}{build}\PYG{p}{:}
+            \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{openproject}
+        \PYG{n+nt}{ports}\PYG{p}{:}
+            \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{5432:5432}
+            \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{8090:80}
+\end{Verbatim}

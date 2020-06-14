@@ -1,0 +1,105 @@
+\documentclass[a4paper]{extarticle}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{minted}
+\usemintedstyle{perldoc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[a4paper, top=20mm, left=30mm, right=10mm, bottom=20mm]{geometry} 
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+\begin{center}
+        
+    \vspace{0.4cm}
+    \large
+    Установка и настройка openproject/jenkins/gitea
+        
+    \vspace{0.4cm}
+    \textbf{Коляда Михаил, гр. ИВТ-32-БО}
+       
+    \vspace{0.3cm}
+    \href{mailto:zlogene@gentoo.org}{zlogene@gentoo.org}
+\end{center}
+
+\section{Используемые средства}
+
+\begin{itemize}
+\item Gentoo Linux
+\item Docker v19.03.8
+\item docker-compose v1.26.0
+\end{itemize}
+
+\section{Описание файла docker-compose.yml}
+
+\begin{figure}[h!]
+\begin{minted}{yaml}
+version: '3.2'
+services:
+    jenkins:
+        container_name: jenkins
+        build:
+            context: jenkins
+            dockerfile: Dockerfile-alpine
+            args:
+               JENKINS_VERSION: 2.235
+        ports:
+           - 8080:8080
+           - 50000:50000
+        volumes:
+           - /tmp:/var/jenkins_home/secrets/
+    gitea:
+        container_name: gitea
+        build:
+            context: gitea
+        ports:
+            - 222:22
+            - 3000:3000
+    openproject:
+        container_name: openproject
+        build:
+            context: openproject
+        ports:
+            - 5432:5432
+            - 8090:80
+\end{minted}
+\caption{структура файла docker-compose.yaml}
+\label{fig:dcy}
+\end{figure}
+
+На рис. \ref{fig:dcy} можно видеть структуру файла dpcker compose. На каждый из трёх компонентов приходится свой компонент \texttt{services}. Контекстом каждого компонента по сути является отдельная директория. Для gitea и openproject используются Docker файлы представленные в master ветках репозиториев. Для jenkins в свою очередь используется модифицированный Dockerfile на основе alpine (модификация заключалась в изменении версии на более новую, а также удаление хеша  проверки целостности SHA512, так как присутствующий хэш относился к старой версии jenkins). Необходимость наличия директивы \texttt{volumes} в описании jenkins обусловлена тем, что нам необходимо получить секретный одноразовый ключ необходимый при первом запуске всей	инсталяции.
+Все порты проброшены согласно стандартной документации на каждый продукт, так имеем:
+
+\begin{itemize}
+\item[--] jenkins работает на порту 8080 (web) и 50000 (jenkins agent)
+\item[--] gitea работает на порту 3000 (web) и 222 (для случаев использования протокола SSH при коммитах)
+\item[--] openproject работает на порту 8090 (web) и 5432 (postgresql)
+\end{itemize}
+
+\section{Некоторые особенности установки}
+
+\section{Скрипт резервного копирования}
+
+\begin{figure}
+\begin{minted}[breaklines]{shell}
+#!/usr/bin/env bash
+
+backup_func() {
+	echo "Runing backup..."
+	for i in \
+	 $(docker container --format="{{.Repository}} {{.ID}}" "unix_ci_*" | cut -d " " -f 1); do docker save ${i} -o ${i}-$(date +"%m-%d-%Y").tar; \
+	done
+}
+
+backup_func;
+\end{minted}
+\caption{Скрипт резервного копирования}
+\label{fig:backup}
+\end{figure}
+
+Скрипт представлен на риc.\ref{fig:backup}. По сути данный  скрипт производит фильтрацию
+
+\end{document}

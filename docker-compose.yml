@@ -17,7 +17,7 @@ services:
         build:
             context: gitea
         ports:
-            - 22:22
+            - 222:22
             - 3000:3000
     openproject:
         container_name: openproject
