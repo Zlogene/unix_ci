@@ -10,7 +10,8 @@ RUN apk add --no-cache \
   tini \
   ttf-dejavu \
   tzdata \
-  unzip
+  unzip \
+  python3
 
 ARG user=jenkins
 ARG group=jenkins
