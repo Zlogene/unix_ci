@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/env bash}
+
+backup\PYGZus{}func\PYG{o}{()} \PYG{o}{\PYGZob{}}
+	\PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}Runing backup...\PYGZdq{}}
+	\PYG{k}{for} i in \PYG{l+s+se}{\PYGZbs{}}
+	 \PYG{k}{\PYGZdl{}(}docker ps \PYGZhy{}\PYGZhy{}filter \PYG{l+s+s2}{\PYGZdq{}name=gitea|jenkins|openproject\PYGZdq{}} \PYG{p}{|} tail \PYGZhy{}n+2 \PYG{p}{|} awk \PYG{l+s+s1}{\PYGZsq{}\PYGZob{}  print \PYGZdl{}1 \PYGZcb{}\PYGZsq{}}\PYG{k}{)}\PYG{p}{;} \PYG{k}{do} docker \PYG{n+nb}{export} \PYGZhy{}o \PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{i}\PYG{l+s+si}{\PYGZcb{}}\PYGZhy{}ci\PYGZhy{}\PYG{k}{\PYGZdl{}(}date +\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}d\PYGZhy{}\PYGZpc{}Y\PYGZdq{}}\PYG{k}{)}.tar \PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{i}\PYG{l+s+si}{\PYGZcb{}}\PYG{p}{;} \PYG{l+s+se}{\PYGZbs{}}
+	\PYG{k}{done}
+\PYG{o}{\PYGZcb{}}
+
+backup\PYGZus{}func\PYG{p}{;}
+\end{Verbatim}

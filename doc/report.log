@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020 Gentoo Linux) (preloaded format=pdflatex 2020.5.31)  14 JUN 2020 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020 Gentoo Linux) (preloaded format=pdflatex 2020.6.26)  29 JUN 2020 01:37
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -271,9 +271,9 @@ File: babel.def 2020/02/28 3.41 Babel common definitions
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
 Package babel Info: \l@australian = using hyphenrules for ukenglish
-(babel)             (\language14) on input line 105.
+(babel)             (\language16) on input line 105.
 Package babel Info: \l@newzealand = using hyphenrules for ukenglish
-(babel)             (\language14) on input line 108.
+(babel)             (\language16) on input line 108.
 )
 (/usr/share/texmf-dist/tex/generic/babel-russian/russianb.ldf
 Language: russian 2017/08/12 1.3j Russian support for the Babel system
@@ -741,38 +741,65 @@ File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 {/usr/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
 \openout3 = `report.pyg'.
 
-runsystem(pygmentize -l shell -f latex -P commandprefix=PYG -F tokenmerge -o _m
-inted-report/2E8A6C7CFEFCAEB0708D02947724249B1A39FB77CC30E57C9335824CAE312944.p
-ygtex report.pyg)...executed.
 
-
-(./_minted-report/2E8A6C7CFEFCAEB0708D02947724249B1A39FB77CC30E57C9335824CAE312
+(./_minted-report/E9E9984653A6F1A75140F3C667723C141A39FB77CC30E57C9335824CAE312
 944.pygtex
 LaTeX Font Info:    External font `cmex7' loaded for size
 (Font)              <5> on input line 7.
 )
-runsystem(rm _minted-report/34391D23FE2571BE144F25613F7A93C51A39FB77CC30E57C933
-5824CAE312944.pygtex)...executed.
+<images/jenkins_setup.png, id=36, 1927.2pt x 1055.945pt>
+File: images/jenkins_setup.png Graphic file (type png)
+<use images/jenkins_setup.png>
+Package pdftex.def Info: images/jenkins_setup.png  used on input line 108.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+<images/gitea_import.png, id=38, 1927.2pt x 1055.945pt>
+File: images/gitea_import.png Graphic file (type png)
+<use images/gitea_import.png>
+Package pdftex.def Info: images/gitea_import.png  used on input line 113.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+ [2 <./images/jenkins_setup.png>]
+<images/jenkins_git.png, id=48, 1927.2pt x 1055.945pt>
+File: images/jenkins_git.png Graphic file (type png)
+<use images/jenkins_git.png>
+Package pdftex.def Info: images/jenkins_git.png  used on input line 118.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+<images/shell.png, id=50, 1927.2pt x 1055.945pt>
+File: images/shell.png Graphic file (type png)
+<use images/shell.png>
+Package pdftex.def Info: images/shell.png  used on input line 127.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+ [3 <./images/gitea_import.png> <./images/jenkins_git.png>]
+<images/suc_build.png, id=59, 1927.2pt x 1055.945pt>
+File: images/suc_build.png Graphic file (type png)
+<use images/suc_build.png>
+Package pdftex.def Info: images/suc_build.png  used on input line 132.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+<images/openproject.png, id=60, 1927.2pt x 1055.945pt>
+File: images/openproject.png Graphic file (type png)
+<use images/openproject.png>
+Package pdftex.def Info: images/openproject.png  used on input line 137.
+(pdftex.def)             Requested size: 483.68085pt x 265.0168pt.
+ [4 <./images/shell.png> <./images/suc_build.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 143.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
- [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
+[5 <./images/openproject.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 143.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 143.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 143.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 786098D0FC42B32A7A2DE01B3D54537B;1030.
+(rerunfilecheck)             Checksum: B3C35EAEB95D56E4A685B61D43391FE5;958.
 runsystem(rm report.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 14060 strings out of 481052
- 221588 string characters out of 5917178
- 524840 words of memory out of 5000000
- 29342 multiletter control sequences out of 15000+600000
+ 14104 strings out of 481067
+ 222205 string characters out of 5920073
+ 524841 words of memory out of 5000000
+ 29369 multiletter control sequences out of 15000+600000
  538664 words of font info for 35 fonts, out of 8000000 for 9000
- 1111 hyphenation exceptions out of 8191
- 41i,12n,39p,1301b,646s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 1096 hyphenation exceptions out of 8191
+ 41i,12n,39p,1301b,641s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/
 texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -781,10 +808,10 @@ ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
 hare/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist
 /fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pu
 blic/cm-super/sftt1000.pfb>
-Output written on report.pdf (2 pages, 130409 bytes).
+Output written on report.pdf (5 pages, 834658 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 63 words of extra memory for PDF output out of 10000 (max. 10000000)
 

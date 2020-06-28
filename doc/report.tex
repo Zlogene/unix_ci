@@ -79,27 +79,65 @@ services:
 \item[--] openproject работает на порту 8090 (web) и 5432 (postgresql)
 \end{itemize}
 
-\section{Некоторые особенности установки}
-
 \section{Скрипт резервного копирования}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{minted}[breaklines]{shell}
 #!/usr/bin/env bash
 
 backup_func() {
 	echo "Runing backup..."
 	for i in \
-	 $(docker container --format="{{.Repository}} {{.ID}}" "unix_ci_*" | cut -d " " -f 1); do docker save ${i} -o ${i}-$(date +"%m-%d-%Y").tar; \
+	 $(docker ps --filter "name=gitea|jenkins|openproject" | tail -n+2 | awk '{  print $1 }'); do docker export -o ${i}-ci-$(date +"%m-%d-%Y").tar ${i}; \
 	done
 }
 
 backup_func;
+
 \end{minted}
 \caption{Скрипт резервного копирования}
 \label{fig:backup}
 \end{figure}
 
-Скрипт представлен на риc.\ref{fig:backup}. По сути данный  скрипт производит фильтрацию
+Скрипт представлен на риc.\ref{fig:backup}. По сути данный  скрипт производит фильтрацию запущенных контейнеров по имени, и экспортирует запущенные экземпляры в tar архивы с датой и временем. Далее архивы можно загрузить вновь используя команду 
+\texttt{docker load -i <archive\_name.tar>}
+
+\section{Демонстрация установки}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{jenkins_setup.png}
+\caption{Начальный экран jenkins, с запросом уникального ключа}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{gitea_import.png}
+\caption{Пример gitea с импортированным личным проектом}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{jenkins_git.png}
+\caption{Пример настройки интеграции gitea и плагина jenkins git}
+\label{fig:git}
+\end{figure}
+
+Для рис. \ref{fig:git} Стоит сделать уточнительное пояснение. Для интеграции необходимо указать полный http-адрес до репозитория. Формально инсталяция gitea расположена по адресу \texttt{localhost:3000}. Однако данный адрес не является внутренним адресом подсети докера, для того-чтобы подключения прошло успешно необходим именно внутренний адрес. В данном случае он был выяснен путём запуска команды
+\verb#docker inspect ${CONTAINER_ID} | grep IPAddr#, где \verb#${CONTAINER_ID}# --- идентификатор контейнера, в котором запущена инсталяция gitea. В качестве данных  для авторизации используются данные пользователя gitea.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{shell.png}
+\caption{Пример проверочной команды для выполнения по коммиту в репозиторий}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{suc_build.png}
+\caption{Пример успешной сборки проекта с помощью интеграции}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{openproject.png}
+\caption{Пример создания тикета в openproject}
+\end{figure}
+
+К сожаление, согласно документации, (а также  форумам поддержки всех трёх проектов), не существует интеграции openproject с gitea или openproject с jenkins.
 
 \end{document}
